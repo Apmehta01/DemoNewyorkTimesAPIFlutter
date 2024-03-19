@@ -640,9 +640,9 @@ class _DashboardSetupScreenState extends ConsumerState<DashboardSetupScreen> {
   String getPageTitle(int index) {
     switch (index) {
       case 0:
-        return AppStrings.STR_HOMES;
+        return AppStrings.STR_NEWS;
       case 1:
-        return AppStrings.STR_HOMES;
+        return AppStrings.STR_BOOKS;
       default:
         return '';
     }

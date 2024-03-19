@@ -542,4 +542,7 @@ class AppStrings {
 
   static const String DATA_FETCH_SUCCESSFULLY = "Data fetch successfully";
   static const String DATA_FETCH_ERROR = "Error while fetching data!";
+
+  static const String STR_BOOKS = "BOOKS";
+  static const String STR_NEWS = "NEWS";
 }
