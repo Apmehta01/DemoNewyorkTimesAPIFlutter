@@ -16,12 +16,6 @@ class CustomPageRoute<T> extends PageRouteBuilder<T> {
 
       var offsetAnimation = Tween(begin: begin, end: end)
           .animate(CurvedAnimation(parent: animation, curve: curve));
-
-     /* var curvedAnimation = CurvedAnimation(
-        parent: animation,
-        curve: curve,
-      );*/
-
       return SlideTransition(position: offsetAnimation, child: child);
     },
   );

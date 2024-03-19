@@ -13,11 +13,6 @@ import '../../../utils/Utils.dart';
 import '../../../utils/uiUtils.dart';
 import '../../../web/model/base/status.dart';
 import '../../../web/model/response/topstories/TopStoriesData.dart';
-import '../widgets/CustomCardGradient.dart';
-import '../widgets/CustomImage.dart';
-import '../widgets/CustomText.dart';
-import '../widgets/GradientText.dart';
-import '../widgets/animations/TweenAnimationBuilderWidget.dart';
 
 final String tag = "TopStoriesScreenOnly";
 
@@ -29,7 +24,6 @@ class TopStoriesScreenOnly extends ConsumerStatefulWidget {
 }
 
 class TopStoriesScreenOnlyState extends ConsumerState<TopStoriesScreenOnly> {
-  late double _opacity;
 
   @override
   void initState() {
@@ -37,7 +31,6 @@ class TopStoriesScreenOnlyState extends ConsumerState<TopStoriesScreenOnly> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       performTopStoriesAPICall();
     });
-    startAnimation();
   }
 
   @override
@@ -52,12 +45,14 @@ class TopStoriesScreenOnlyState extends ConsumerState<TopStoriesScreenOnly> {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: CustomText(
-              text: AppStrings.STR_NEWS,
-              color: AppColors.White,
-              fontFamily: Constants.APP_FONT,
-              fontSize: AppTypography.descriptionFontSize,
-              fontWeight: FontWeight.w700,
+            title: Text(
+              AppStrings.STR_NEWS,
+              style: TextStyle(
+                color: AppColors.White,
+                fontFamily: Constants.APP_FONT,
+                fontSize: AppTypography.descriptionFontSize,
+                fontWeight: FontWeight.w700,
+              ),
               textAlign: TextAlign.center,
             ),
             backgroundColor: Colors.transparent,
@@ -76,172 +71,125 @@ class TopStoriesScreenOnlyState extends ConsumerState<TopStoriesScreenOnly> {
             ),
             centerTitle: true,
           ),
-          body: TweenAnimationBuilderWidget<double>(
-              begin: 0.0,
-              end: _opacity,
-              // End value is the opacity value you want to animate to
-              duration: const Duration(seconds: 1),
-              builder: (context, value, child) {
-                return Opacity(
-                  opacity: value,
-                  child: ListView.builder(
-                    itemCount: topStoriesList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      String hintImage = topStoriesList[index]
-                              .multimedia![0]
-                              .url ??
-                          '${Constants.STR_BASE_URL_ASSETS}ic_no_internet.png';
+          body: ListView.builder(
+            itemCount: topStoriesList.length,
+            itemBuilder: (BuildContext context, int index) {
+              String hintImage = topStoriesList[index].multimedia![0].url ??
+                  '${Constants.STR_BASE_URL_ASSETS}ic_no_internet.png';
 
-                      return Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
-                        child: Card(
-                          color: AppColors.White,
-                          elevation: 5.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.network(
-                                  hintImage,
-                                  width: double.infinity,
-                                  height: 220.0,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (BuildContext context,
-                                      Object error, StackTrace? stackTrace) {
-                                    return Image.asset(
-                                      '${Constants.STR_BASE_URL_ASSETS}ic_no_internet.png',
-                                      width: double.infinity,
-                                      height: 220.0,
-                                      fit: BoxFit.contain,
-                                      color: AppColors.color_primary,
-                                    ); // Replace YourErrorWidget with your custom error widget
-                                  },
-                                ),
-                                const SizedBox(height: 10.0),
-                                CustomText(
-                                  text: topStoriesList[index].title.toString(),
-                                  color: AppColors.primary,
-                                  fontSize:
-                                      AppTypography.smallDescriptionFontSize,
-                                  fontWeight: FontWeight.w600,
-                                  textAlign: TextAlign.start,
-                                  fontFamily: Constants.APP_FONT,
-                                ),
-                                Text(
-                                  topStoriesList[index].title.toString(),
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontFamily: Constants.APP_FONT,
-                                    fontSize:
-                                        AppTypography.smallDescriptionFontSize,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  textAlign: TextAlign
-                                      .start, // Use the provided textAlign property
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  topStoriesList[index].abstract.toString(),
-                                  style: TextStyle(
-                                    color: AppColors.md_blue_grey_700,
-                                    fontSize: AppTypography.tinyFontSize,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: Constants.APP_FONT,
-                                  ),
-                                  textAlign: TextAlign
-                                      .start, // Use the provided textAlign property
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  Utils.formatDateAndTime(topStoriesList[index]
-                                      .publishedDate
-                                      .toString()),
-                                  style: TextStyle(
-                                    color: AppColors.md_blue_grey_700,
-                                    fontSize:
-                                        AppTypography.smallDescriptionFontSize,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: Constants.APP_FONT,
-                                  ),
-                                  textAlign: TextAlign
-                                      .start, // Use the provided textAlign property
-                                ),
-                              ],
-                            ),
-                          ),
+              return Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 15.0),
+                child: Card(
+                  color: AppColors.White,
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.network(
+                          hintImage,
+                          width: double.infinity,
+                          height: 220.0,
+                          fit: BoxFit.cover,
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.asset(
+                              '${Constants.STR_BASE_URL_ASSETS}ic_no_internet.png',
+                              width: double.infinity,
+                              height: 220.0,
+                              fit: BoxFit.contain,
+                              color: AppColors.color_primary,
+                            ); // Replace YourErrorWidget with your custom error widget
+                          },
                         ),
-                      );
-                    },
+                        const SizedBox(height: 10.0),
+                        Text(
+                          topStoriesList[index].title.toString(),
+                          style: TextStyle(
+                              color: AppColors.primary,
+                              fontSize: AppTypography.smallDescriptionFontSize,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: Constants.APP_FONT),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          topStoriesList[index].title.toString(),
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontFamily: Constants.APP_FONT,
+                            fontSize: AppTypography.smallDescriptionFontSize,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign
+                              .start, // Use the provided textAlign property
+                        ),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          topStoriesList[index].abstract.toString(),
+                          style: TextStyle(
+                            color: AppColors.md_blue_grey_700,
+                            fontSize: AppTypography.tinyFontSize,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: Constants.APP_FONT,
+                          ),
+                          textAlign: TextAlign
+                              .start, // Use the provided textAlign property
+                        ),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          Utils.formatDateAndTime(
+                              topStoriesList[index].publishedDate.toString()),
+                          style: TextStyle(
+                            color: AppColors.md_blue_grey_700,
+                            fontSize: AppTypography.smallDescriptionFontSize,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: Constants.APP_FONT,
+                          ),
+                          textAlign: TextAlign
+                              .start, // Use the provided textAlign property
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              }),
+                ),
+              );
+            },
+          ),
         );
       } else {
         return Scaffold(
-          body: TweenAnimationBuilderWidget<double>(
-              begin: 0.0,
-              end: _opacity,
-              // End value is the opacity value you want to animate to
-              duration: const Duration(seconds: 1),
-              builder: (context, value, child) {
-                return Opacity(
-                  opacity: value,
-                  child: Center(
-                    child: Text(
-                      AppStrings.STR_NO_DATA_AVAILABLE,
-                      style: TextStyle(
-                        fontFamily: Constants.APP_FONT,
-                        fontSize: AppTypography.titleFontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign
-                          .center, // Use the provided textAlign property
-                    ),
-                  ),
-                );
-              }),
+          body: Center(
+            child: Text(
+              AppStrings.STR_NO_DATA_AVAILABLE,
+              style: TextStyle(
+                fontFamily: Constants.APP_FONT,
+                fontSize: AppTypography.titleFontSize,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign:
+                  TextAlign.center, // Use the provided textAlign property
+            ),
+          ),
         );
       }
     } else {
       return Scaffold(
-        body: TweenAnimationBuilderWidget<double>(
-            begin: 0.0,
-            end: _opacity,
-            // End value is the opacity value you want to animate to
-            duration: const Duration(seconds: 1),
-            builder: (context, value, child) {
-              return Opacity(
-                opacity: value,
-                child: Center(
-                  child: Text(
-                    AppStrings.STR_NO_DATA_AVAILABLE,
-                    style: TextStyle(
-                      fontFamily: Constants.APP_FONT,
-                      fontSize: AppTypography.titleFontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign
-                        .center, // Use the provided textAlign property
-                  ),
-                ),
-              );
-            }),
+        body: Center(
+          child: Text(
+            AppStrings.STR_NO_DATA_AVAILABLE,
+            style: TextStyle(
+              fontFamily: Constants.APP_FONT,
+              fontSize: AppTypography.titleFontSize,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center, // Use the provided textAlign property
+          ),
+        ),
       );
     }
-  }
-
-  void startAnimation() {
-    _opacity = 0.0; // Initial opacity value
-    // Start the animation after the widget has been built
-    Future.delayed(const Duration(milliseconds: AppStrings.ANIMATION_TIME_OUT),
-        () {
-      setState(() {
-        _opacity = 1.0; // Set opacity to 1 to animate the widget's appearance
-      });
-    });
   }
 
   Future<void> performTopStoriesAPICall() async {

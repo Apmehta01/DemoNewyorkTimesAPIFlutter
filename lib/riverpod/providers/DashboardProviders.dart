@@ -21,6 +21,10 @@ final topStoriesApiProvider = FutureProvider.family<APIResponse, CommonRequest>(
   },
 );
 
+final topStoriesDataProvider = ChangeNotifierProvider<TopStoriesDataNotifier>((ref) {
+  return TopStoriesDataNotifier();
+});
+
 final booksApiProvider = FutureProvider.family<APIResponse, CommonRequest>(
       (ref, commonRequest) async {
     final repository = DashboardRepository();
@@ -38,6 +42,3 @@ final booksDataProvider = ChangeNotifierProvider<BooksDataNotifier>((ref) {
   return BooksDataNotifier();
 });
 
-final topStoriesDataProvider = ChangeNotifierProvider<TopStoriesDataNotifier>((ref) {
-  return TopStoriesDataNotifier();
-});

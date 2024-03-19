@@ -112,7 +112,7 @@ class SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () async {
       Navigator.of(context).pushReplacement(
         Routes.generateRoute(
-          const RouteSettings(name: RoutesName.TOP_STORIES_SCREEN_ONLY),
+          const RouteSettings(name: RoutesName.DASHBOARD_SETUP_SCREEN),
         ),
       );
     });

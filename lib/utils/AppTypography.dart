@@ -4,12 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTypography {
-  /*static const double headerFontSize = 24.0;
-  static const double mediumFontSize = 20.0;
-  static const double bigFontSize = 22.0;
-  static const double titleFontSize = 18.0;
-  static const double descriptionFontSize = 16.0;
-  static const double small_descriptionFontSize = 14.0;*/
 
   static double headerFontSize = 24.sp;
   static double bigFontSize = 22.sp;
