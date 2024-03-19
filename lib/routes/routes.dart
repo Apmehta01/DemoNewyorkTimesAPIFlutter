@@ -1,5 +1,6 @@
 import 'package:demonewyorktimeapi/routes/routes_name.dart';
 import 'package:demonewyorktimeapi/utils/color_extensions.dart';
+import 'package:demonewyorktimeapi/views/dashboard/TopStoriesScreenOnly.dart';
 import 'package:flutter/material.dart';
 
 import '../resources/AppColors.dart';
@@ -26,6 +27,9 @@ class Routes {
         return CustomPageRoute(
             builder: (BuildContext context) => const DashboardSetupScreen(
                 showBackButton: false, showHomeButton: false));
+      case RoutesName.TOP_STORIES_SCREEN_ONLY:
+        return CustomPageRoute(
+            builder: (BuildContext context) => const TopStoriesScreenOnly());
       default:
         return MaterialPageRoute(builder: (_) {
           return Scaffold(
